@@ -4,7 +4,7 @@
 
 * Results from benchmarks
 
-** Optimizations that we test
+** Methodology
 We summarize here the results from benchmarks on various versions of APTE.
 
 *** Software

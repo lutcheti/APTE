@@ -42,5 +42,6 @@ def main():
                     print(line_t)
                 log_t_b.write(line_t + "\n")
                 log_t_b.flush()
+        print_all("\n")
 
 main()
