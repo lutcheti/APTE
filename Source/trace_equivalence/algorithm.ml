@@ -212,7 +212,25 @@ let rec apply_strategy want_trace support left_symb_proc_l right_symb_proc_l =
     ) symb_proc_1
   ) right_symb_proc_list;
   
-    (* Second step : apply the output transition *)
+
+  (* Lucca Hirschi:
+     Before Second step: detect whether we have reached the end of the "non-simple"
+     prefix (see. process.ml l.306). In that case, we split the Par at top level
+     into ordered multiset of processes and set last_action.action to AStart. *)
+  let left_internal_split = ref []
+  and right_internal_split = ref [] in
+
+  List.iter (fun symb_proc ->
+    let split_symb_proc = Process.from_par_to_multiset symb_proc in
+    left_internal_split := split_symb_proc :: !left_internal_split)
+    !left_internal;
+
+  List.iter (fun symb_proc ->
+    let split_symb_proc = Process.from_par_to_multiset symb_proc in
+    right_internal_split := split_symb_proc :: !right_internal_split)
+    !right_internal;
+
+  (* Second step : apply the output transition + generation of dep. csts. *)
   let left_set = ref []
   and right_set = ref [] in
   
@@ -225,7 +243,7 @@ let rec apply_strategy want_trace support left_symb_proc_l right_symb_proc_l =
       if not (Process.is_bottom simplified_symb_proc)
       then left_set := simplified_symb_proc::!left_set
     ) var_r_ch symb_proc_1
-  ) !left_internal;
+  ) !left_internal_split;
   
   List.iter (fun symb_proc_1 ->
     Process.apply_output (fun symb_proc_2 -> 
@@ -234,7 +252,7 @@ let rec apply_strategy want_trace support left_symb_proc_l right_symb_proc_l =
       if not (Process.is_bottom simplified_symb_proc)
       then right_set := simplified_symb_proc::!right_set
     ) var_r_ch symb_proc_1
-  ) !right_internal;
+  ) !right_internal_split;
   
     (* Third step : apply the strategy on the output matrix *)
   
@@ -244,10 +262,8 @@ let rec apply_strategy want_trace support left_symb_proc_l right_symb_proc_l =
     if not particular_trace || (want_trace <> [] && (List.hd want_trace = Output))
     then apply_strategy_for_constraint_system (if particular_trace then List.tl want_trace else want_trace) Strategy.apply_strategy_output !left_set !right_set;
       (** End Debug **)
-  
-  
-      (* Fourth step : apply the input transition *)
-  
+
+  (* Fourth step : apply the input transition *)
   left_set := [];
   right_set := [];
   
@@ -260,8 +276,8 @@ let rec apply_strategy want_trace support left_symb_proc_l right_symb_proc_l =
       let simplified_symb_proc = Process.simplify symb_proc_2 in
       if not (Process.is_bottom simplified_symb_proc)
       then left_set := simplified_symb_proc::!left_set
-    ) var_r_ch var_r_t symb_proc_1
-  ) !left_internal;
+      ) var_r_ch var_r_t symb_proc_1
+  ) !left_internal_split;
   
   List.iter (fun symb_proc_1 ->
     Process.apply_input (fun symb_proc_2 -> 
@@ -270,7 +286,7 @@ let rec apply_strategy want_trace support left_symb_proc_l right_symb_proc_l =
       if not (Process.is_bottom simplified_symb_proc)
       then right_set := simplified_symb_proc::!right_set
     ) var_r_ch var_r_t symb_proc_1
-  ) !right_internal;
+  ) !right_internal_split;
   
 
       (* Fifth step : apply the strategy on the input matrix *)
