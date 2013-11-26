@@ -1,0 +1,116 @@
+Opening file Example/Simple_Private_Authentication_Protocol_2_sessions.txt
+------------
+Equivalence between the two following processes:
+
+Process 1 =
+{1} new Nk_a_26.
+{2} new Nk_b_27.
+{3} new Nk_c_28.
+{4} out(Nc_0,pk(Nk_a_26));
+{5} out(Nc_0,pk(Nk_b_27));
+{6} out(Nc_0,pk(Nk_c_28));
+(
+  {7} new NN_a_34.
+  {8} out(Nc_a1_1,aenc((NN_a_34,pk(Nk_a_26)),pk(Nk_b_27)));
+  {9} in(Nc_a1_1,Vx_52);
+) | (
+  {10} in(Nc_b1_2,Vx_49);
+  {11} let (Vna_50,Vpka_51) = adec(Vx_49,Nk_b_27) in
+  {12} if Vpka_51 = pk(Nk_a_26) then
+    {13} new NN_b_32.
+    {14} out(Nc_b1_2,aenc((Vna_50,NN_b_32,pk(Nk_b_27)),pk(Nk_a_26)));
+  else
+    {15} new NN_33.
+    {16} out(Nc_b1_2,aenc(NN_33,pk(Nk_a_26)));
+) | (
+  {17} new NN_a_31.
+  {18} out(Nc_a2_3,aenc((NN_a_31,pk(Nk_c_28)),pk(Nk_b_27)));
+  {19} in(Nc_a2_3,Vx_48);
+) | (
+  {20} in(Nc_b2_4,Vx_45);
+  {21} let (Vna_46,Vpka_47) = adec(Vx_45,Nk_b_27) in
+  {22} if Vpka_47 = pk(Nk_c_28) then
+    {23} new NN_b_29.
+    {24} out(Nc_b2_4,aenc((Vna_46,NN_b_29,pk(Nk_b_27)),pk(Nk_c_28)));
+  else
+    {25} new NN_30.
+    {26} out(Nc_b2_4,aenc(NN_30,pk(Nk_c_28)));
+)
+
+
+Process2 =
+{1} new Nk_a_35.
+{2} new Nk_b_36.
+{3} new Nk_c_37.
+{4} out(Nc_0,pk(Nk_a_35));
+{5} out(Nc_0,pk(Nk_b_36));
+{6} out(Nc_0,pk(Nk_c_37));
+(
+  {7} new NN_a_43.
+  {8} out(Nc_a1_1,aenc((NN_a_43,pk(Nk_c_37)),pk(Nk_b_36)));
+  {9} in(Nc_a1_1,Vx_60);
+) | (
+  {10} in(Nc_b1_2,Vx_57);
+  {11} let (Vna_58,Vpka_59) = adec(Vx_57,Nk_b_36) in
+  {12} if Vpka_59 = pk(Nk_c_37) then
+    {13} new NN_b_41.
+    {14} out(Nc_b1_2,aenc((Vna_58,NN_b_41,pk(Nk_b_36)),pk(Nk_c_37)));
+  else
+    {15} new NN_42.
+    {16} out(Nc_b1_2,aenc(NN_42,pk(Nk_c_37)));
+) | (
+  {17} new NN_a_40.
+  {18} out(Nc_a2_3,aenc((NN_a_40,pk(Nk_c_37)),pk(Nk_b_36)));
+  {19} in(Nc_a2_3,Vx_56);
+) | (
+  {20} in(Nc_b2_4,Vx_53);
+  {21} let (Vna_54,Vpka_55) = adec(Vx_53,Nk_b_36) in
+  {22} if Vpka_55 = pk(Nk_c_37) then
+    {23} new NN_b_38.
+    {24} out(Nc_b2_4,aenc((Vna_54,NN_b_38,pk(Nk_b_36)),pk(Nk_c_37)));
+  else
+    {25} new NN_39.
+    {26} out(Nc_b2_4,aenc(NN_39,pk(Nk_c_37)));
+)
+
+
+Starting the decision procedure...
+Process to create: {1} new Nk_a_26.
+{2} new Nk_b_27.
+{3} new Nk_c_28.
+{4} out(Nc_0,pk(Nk_a_26));
+{5} out(Nc_0,pk(Nk_b_27));
+{6} out(Nc_0,pk(Nk_c_28));
+(
+  {7} new NN_a_34.
+  {8} out(Nc_a1_1,aenc((NN_a_34,pk(Nk_a_26)),pk(Nk_b_27)));
+  {9} in(Nc_a1_1,Vx_52);
+) | (
+  {10} in(Nc_b1_2,Vx_49);
+  {11} let (Vna_50,Vpka_51) = adec(Vx_49,Nk_b_27) in
+  {12} if Vpka_51 = pk(Nk_a_26) then
+    {13} new NN_b_32.
+    {14} out(Nc_b1_2,aenc((Vna_50,NN_b_32,pk(Nk_b_27)),pk(Nk_a_26)));
+  else
+    {15} new NN_33.
+    {16} out(Nc_b1_2,aenc(NN_33,pk(Nk_a_26)));
+) | (
+  {17} new NN_a_31.
+  {18} out(Nc_a2_3,aenc((NN_a_31,pk(Nk_c_28)),pk(Nk_b_27)));
+  {19} in(Nc_a2_3,Vx_48);
+) | (
+  {20} in(Nc_b2_4,Vx_45);
+  {21} let (Vna_46,Vpka_47) = adec(Vx_45,Nk_b_27) in
+  {22} if Vpka_47 = pk(Nk_c_28) then
+    {23} new NN_b_29.
+    {24} out(Nc_b2_4,aenc((Vna_46,NN_b_29,pk(Nk_b_27)),pk(Nk_c_28)));
+  else
+    {25} new NN_30.
+    {26} out(Nc_b2_4,aenc(NN_30,pk(Nk_c_28)));
+)
+
+Number of final tests: 393.
+Number of pruned roots corresponding to improper traces (executions killed): 0.
+Number of pruned roots thanks to reduction: 0.
+Result : The trace equivalence is true
+Result obtained in 0.086121 seconds

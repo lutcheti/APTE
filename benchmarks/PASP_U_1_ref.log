@@ -1,0 +1,104 @@
+Opening file Example/Simple_Passport_PA_Unlinkability.txt
+------------
+Equivalence between the two following processes:
+
+Process 1 =
+{1} new NKPrDS_17.
+{2} let VKPuDS_85 = pk(NKPrDS_17) in
+{3} in(Nc_0,Vzz_86);
+{4} out(Nc_0,VKPuDS_85);
+{5} let Vsod1_87 = (h(dg_1),sign(h(dg_1),NKPrDS_17)) in
+{6} new Nksenc1_18.
+{7} new Nksmac1_19.
+{8} let Vsod2_88 = (h(dg_2),sign(h(dg_2),NKPrDS_17)) in
+{9} new Nksenc2_20.
+{10} new Nksmac2_21.
+(
+  {11} let Vmenc_104 = senc(read,Nksenc1_18) in
+  {12} let Vmmac_105 = mac(Vmenc_104,Nksmac1_19) in
+  {13} in(Ncp1_1,Vzz_106);
+  {14} out(Ncp1_1,(Vmenc_104,Vmmac_105));
+) | (
+  {15} in(Ncr1_3,Vx_98);
+  {16} let (Vxenc_99,Vxmac_100) = Vx_98 in
+  {17} if Vxmac_100 = mac(Vxenc_99,Nksmac1_19) then
+    {18} let Vxread_101 = sdec(Vxenc_99,Nksenc1_18) in
+    {19} if Vxread_101 = read then
+      {20} let Vmenc_102 = senc((dg_1,Vsod1_87),Nksenc1_18) in
+      {21} let Vmmac_103 = mac(Vmenc_102,Nksmac1_19) in
+      {22} out(Ncr1_3,(Vmenc_102,Vmmac_103));
+) | (
+  {23} let Vmenc_95 = senc(read,Nksenc2_20) in
+  {24} let Vmmac_96 = mac(Vmenc_95,Nksmac2_21) in
+  {25} in(Ncp2_2,Vzz_97);
+  {26} out(Ncp2_2,(Vmenc_95,Vmmac_96));
+) | (
+  {27} in(Ncr2_4,Vx_89);
+  {28} let (Vxenc_90,Vxmac_91) = Vx_89 in
+  {29} if Vxmac_91 = mac(Vxenc_90,Nksmac2_21) then
+    {30} let Vxread_92 = sdec(Vxenc_90,Nksenc2_20) in
+    {31} if Vxread_92 = read then
+      {32} let Vmenc_93 = senc((dg_2,Vsod2_88),Nksenc2_20) in
+      {33} let Vmmac_94 = mac(Vmenc_93,Nksmac2_21) in
+      {34} out(Ncr2_4,(Vmenc_93,Vmmac_94));
+)
+
+
+Process2 =
+{1} new NKPrDS_22.
+{2} let VKPuDS_107 = pk(NKPrDS_22) in
+{3} in(Nc_0,Vzz_108);
+{4} out(Nc_0,VKPuDS_107);
+{5} let Vsod1_109 = (h(dg_1),sign(h(dg_1),NKPrDS_22)) in
+{6} new Nksenc1_23.
+{7} new Nksmac1_24.
+{8} let Vsod2_110 = (h(dg_2),sign(h(dg_2),NKPrDS_22)) in
+{9} new Nksenc2_25.
+{10} new Nksmac2_26.
+(
+  {11} let Vmenc_126 = senc(read,Nksenc1_23) in
+  {12} let Vmmac_127 = mac(Vmenc_126,Nksmac1_24) in
+  {13} in(Ncp1_1,Vzz_128);
+  {14} out(Ncp1_1,(Vmenc_126,Vmmac_127));
+) | (
+  {15} in(Ncr1_3,Vx_120);
+  {16} let (Vxenc_121,Vxmac_122) = Vx_120 in
+  {17} if Vxmac_122 = mac(Vxenc_121,Nksmac1_24) then
+    {18} let Vxread_123 = sdec(Vxenc_121,Nksenc1_23) in
+    {19} if Vxread_123 = read then
+      {20} let Vmenc_124 = senc((dg_1,Vsod1_109),Nksenc1_23) in
+      {21} let Vmmac_125 = mac(Vmenc_124,Nksmac1_24) in
+      {22} out(Ncr1_3,(Vmenc_124,Vmmac_125));
+) | (
+  {23} let Vmenc_117 = senc(read,Nksenc2_25) in
+  {24} let Vmmac_118 = mac(Vmenc_117,Nksmac2_26) in
+  {25} in(Ncp2_2,Vzz_119);
+  {26} out(Ncp2_2,(Vmenc_117,Vmmac_118));
+) | (
+  {27} in(Ncr2_4,Vx_111);
+  {28} let (Vxenc_112,Vxmac_113) = Vx_111 in
+  {29} if Vxmac_113 = mac(Vxenc_112,Nksmac2_26) then
+    {30} let Vxread_114 = sdec(Vxenc_112,Nksenc2_25) in
+    {31} if Vxread_114 = read then
+      {32} let Vmenc_115 = senc((dg_1,Vsod2_110),Nksenc2_25) in
+      {33} let Vmmac_116 = mac(Vmenc_115,Nksmac2_26) in
+      {34} out(Ncr2_4,(Vmenc_115,Vmmac_116));
+)
+
+
+Starting the decision procedure...
+Current matrix size 1 lines, 8 columns. Final test reached = 1000, number_of_branches_cut = 0 ()
+Current matrix size 1 lines, 12 columns. Final test reached = 2000, number_of_branches_cut = 0 ()
+Current matrix size 1 lines, 2 columns. Final test reached = 3000, number_of_branches_cut = 0 ()
+Current matrix size 1 lines, 2 columns. Final test reached = 4000, number_of_branches_cut = 0 ()
+Current matrix size 1 lines, 14 columns. Final test reached = 5000, number_of_branches_cut = 0 ()
+Current matrix size 1 lines, 2 columns. Final test reached = 6000, number_of_branches_cut = 0 ()
+Current matrix size 1 lines, 8 columns. Final test reached = 7000, number_of_branches_cut = 0 ()
+Current matrix size 1 lines, 8 columns. Final test reached = 8000, number_of_branches_cut = 0 ()
+Current matrix size 1 lines, 14 columns. Final test reached = 9000, number_of_branches_cut = 0 ()
+Current matrix size 1 lines, 8 columns. Final test reached = 10000, number_of_branches_cut = 0 ()
+Current matrix size 1 lines, 8 columns. Final test reached = 11000, number_of_branches_cut = 0 ()
+Current matrix size 1 lines, 8 columns. Final test reached = 12000, number_of_branches_cut = 0 ()
+Current matrix size 1 lines, 8 columns. Final test reached = 13000, number_of_branches_cut = 0 ()
+Result : The trace equivalence is true
+Result obtained in 10.146374 seconds

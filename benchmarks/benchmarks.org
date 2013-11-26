@@ -1,0 +1,44 @@
+#+TITLE: Results from benchmarks
+#+AUTHOR: Lucca Hirschi
+#+DATE: <2013-11-26 Mar>
+
+* Optimizations that we test
+We summarize here the results from benchmarks on various versions of APTE.
+
+** Versions of APTE
+We test three versions:
+  1. ref: which is the official apte version c03.2beta (corresponding to the tag
+     v0.3.2beta);
+  2. comp: where the first step (i.e. compression step) has been implemented in
+     a naive way (+170l). This corresponds to the branch optim-compression
+     (commit a9fc0bb).
+  3. red: where the second step (i.e. reduction step) has been additionally
+     implemented.
+This corresponds to the branch optim-c+r (commit d43ec64).
+
+** Protocols
+All protocols we test can be found in the folder Example (at the root of the
+repo). They all have the prefix "Simple_".
+A few are hand-made protocols, the others are used in practice.
+
+** Test machine
+ - OS: Linux sume 3.10-2-amd64 #1 SMP Debian 3.10.5-1 (2013-08-07) x86_64
+   GNU/Linux
+ - CPU: Intel(R) Xeon(R) CPU X5650  @ 2.67GHz / stepping: 2 / microcode: 0x13 /
+   cpu MHz: 2659.937 /cache size: 12288 KB
+ - RAM: 47GO
+
+
+* Results
+
+The column size contains the number of basic process / number
+of actions / max depth of the basic processes.
+
+| Protocol             | Size   | Ref (s.) | Comp (s) | Red(s) |
+|----------------------+--------+----------+----------+--------|
+| Private_Auth 2 Sess. | 4/13/5 |  1078.00 |          |  0.086 |
+| Private_Auth 3 Sess. | 8/26/5 |          |          |   8.70 |
+| Simple 3 parallels   | 3/6/2  |          |          |        |
+| Simple 5 parallels   | 5/10/2 |          |          |        |
+| Simple 7 parallels   | 7/14/2 |          |          |        |
+| Soon                 |        |          |          |        |
