@@ -32,19 +32,37 @@ All protocols we test can be found in the folder Example (at the root of the
 repo). They all have the prefix "Simple_".
 A few are hand-made protocols, the others are used in practice.
 The script launch_benchmark.py in this folder launch the different versions
-of apte on the different protocols. We count the built-in measure of the
-time consumed.
+of apte on the different protocols (note that you have to build three binaries,
+one by version). We count the built-in measure of the time consumed.
 
 ** Results
 
 The column size contains the number of basic process / number
 of actions / max depth of the basic processes.
 
-| Protocol              | Size   | Ref (s.) | Comp (s) | Red(s) |
-|-----------------------+--------+----------+----------+--------|
-| Private Auth .2 Sess. | 4/13/5 |  1078.00 |          |  0.086 |
-| Private Auth. 3 Sess. | 8/26/5 |          |          |   8.70 |
-| Simple 3 parallels    | 3/6/2  |          |          |        |
-| Simple 5 parallels    | 5/10/2 |          |          |        |
-| Simple 7 parallels    | 7/14/2 |          |          |        |
-| Soon                  |        |          |          |        |
+| Protocol                     | Size   |  Ref (s.) | Comp (s) | Red(s) |
+|------------------------------+--------+-----------+----------+--------|
+| Private Auth. 1 Sess.        | 2/9/5  |     0.164 | ?        | 0.0080 |
+| Private Auth. 2 Sess.        | 4/15/5 |   1078.00 | ?        |  0.060 |
+| Private Auth. 3 Sess.        | 6/21/5 |           | ?        |   5.04 |
+| Basic Access Control 1 Se./1 | 4/52/6 |    14.248 | ?        |      ? |
+| Basic Access Control 1 Se./2 | 4/52/6 |    14.248 | ?        |      ? |
+| Wide Mouth Frog 1 Sess.      | 8/3/4  |    0.0760 | ?        |      ? |
+|------------------------------+--------+-----------+----------+--------|
+| Simple 3 parallels           | 3/6/2  |     0.060 | 0.004    | 0.0040 |
+| Simple 5 parallels           | 5/10/2 |           | 0.124    |  0.024 |
+| Simple 7 parallels           | 7/14/2 |           | 8.512    |  0.204 |
+| Complex 4 parallels          | 4/10/4 |     94.18 | ?        |  0.136 |
+| Complex 7 parallels          | 7/16/4 | > 432 000 | ?        | 363.08 |
+|------------------------------+--------+-----------+----------+--------|
+
+
+About the names of procotols:
+  - Simple parallels: Simple_bench_size in Example/. The protocol is made of
+    similar basic processes of the form IN.[x=ok].OUT;
+  - Complex parallels: tests_h_* in Example/. Similar but here the test is much
+    more complex;
+  - We test two versi[M F!ons of the Basic Access Protocol (and check the unlikability
+    of the passeport.
+
+Note: problem with Basic Acess Control (not simple?).
