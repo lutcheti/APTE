@@ -11,26 +11,27 @@ from datetime import datetime
 
 def main():
     HEAD = " " + "#"*10 + " "
-    HEADA = " " + "#"*5 + " "
+    HEADA = " " + "#"*3 + " "
     IND = " " * 50
     list_tests = glob.glob('../Example/Simple_*.txt')
     list_binaries = glob.glob('../apte_*')
-    log_all = open("log/results_" + str(datetime.now()) + ".log", "w+")
+    log_all = open("log/results" + ".log", "a")
     def print_all(s):
 #        print s
         log_all.write(s)
         log_all.flush()
+    print_all("="*15 + " STARTING A NEW BENCHMARK " + "="*15 +"\n")
+    print_all("Date: " + str(datetime.now()) + "\n")
+    for binary in list_binaries:
+        b_name = binary.split('../')[1]
+        print_all("\n" + HEAD + "Starting to benchmark version: " + b_name + HEAD + "\n")
+        print_all(IND + str(datetime.now()) + "\n")
+        for file in list_tests:
+            t_name = file.split("/Example/")[1].split(".txt")[0]
+            print_all(HEADA + "Benchmark of Protocol: " + t_name + HEADA + "\n")
+            print_all(IND + str(datetime.now()) + "\n") # timestamp
 
-    for file in list_tests:
-        t_name = file.split("/Example/")[1].split(".txt")[0]
-        print_all(HEAD + "Starting to benchmark: " + t_name + HEAD + "\n")
-        print_all(IND + str(datetime.now()) + "\n") # timestamp
-
-        for binary in list_binaries:
-            b_name = binary.split('../')[1]
-            print_all(HEADA + "Starting to benchmark: " + b_name + HEADA + "\n")
             log_t_b = open("log/" + t_name + "_" + b_name + ".log", "w+")
-            print_all(IND + str(datetime.now()) + "\n")
             log_t_b.write(IND + str(datetime.now()))
             proc = subprocess.Popen([binary, file],
                                     stdout=subprocess.PIPE)

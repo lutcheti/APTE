@@ -20,7 +20,7 @@ This corresponds to the branch optim-c+r (commit d43ec64).
 
 The version of OCaml we used is 3.12.1.
 
-*** Harware
+*** Hardware
  - OS: Linux sume 3.10-2-amd64 #1 SMP Debian 3.10.5-1 (2013-08-07) x86_64
    GNU/Linux
  - CPU: Intel(R) Xeon(R) CPU X5650  @ 2.67GHz / stepping: 2 / microcode: 0x13 /
