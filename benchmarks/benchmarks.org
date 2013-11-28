@@ -41,18 +41,18 @@ of actions / max depth of the basic processes.
 
 | Protocol                     | Size   | Ref (s.) | Comp (s) | Red(s) |
 |------------------------------+--------+----------+----------+--------|
-| Private Auth. 1 Sess.        | 2/9/5  |    0.164 |    0.008 | 0.0080 |
-| Private Auth. 2 Sess.        | 4/15/5 |  1078.00 |        ? |  0.060 |
-| Private Auth. 3 Sess.        | 6/21/5 |        ? |        ? |   5.04 |
-| Basic Access Control 1 Se./1 | 4/52/6 |   14.248 |        ? |      ? |
-| Basic Access Control 1 Se./2 | 4/52/6 |   > 1800 |        ? |      ? |
-| Wide Mouth Frog 1 Sess.      | 8/3/4  |   0.0760 |        ? |      ? |
+| Private Auth. 1 Sess.        | 2/9/5  |    0.164 | 0.008    | 0.0080 |
+| Private Auth. 2 Sess.        | 4/15/5 |  1078.00 | ?        |  0.060 |
+| Private Auth. 3 Sess.        | 6/21/5 |        ? | ?        |   5.04 |
+| Basic Access Control 1 Se./1 | 4/52/6 |   14.248 | ?        |      ? |
+| Basic Access Control 1 Se./2 | 4/52/6 |   > 1800 | ?        |      ? |
+| Wide Mouth Frog 1 Sess.      | 8/3/4  |   0.0760 | ?        |      ? |
 |------------------------------+--------+----------+----------+--------|
-| Simple 3 parallels           | 3/6/2  |    0.060 |    0.004 | 0.0040 |
-| Simple 5 parallels           | 5/10/2 |        ? |    0.124 |  0.024 |
-| Simple 7 parallels           | 7/14/2 |        ? |    8.512 |  0.204 |
-| Complex 4 parallels          | 4/10/4 |    94.18 |    0.784 |  0.136 |
-| Complex 7 parallels          | 7/16/4 | > 432000 |    364.7 | 363.08 |
+| Simple 3 parallels           | 3/6/2  |    0.060 | 0.004    | 0.0040 |
+| Simple 5 parallels           | 5/10/2 |        ? | 0.124    |  0.024 |
+| Simple 7 parallels           | 7/14/2 |        ? | 8.512    |  0.204 |
+| Complex 4 parallels          | 4/10/4 |    94.18 | 0.784    |  0.136 |
+| Complex 7 parallels          | 7/16/4 | > 432000 | > 78876  | 363.08 |
 |------------------------------+--------+----------+----------+--------|
 
 
