@@ -10,6 +10,7 @@ free c_s.
 free ok.
 
 let A m kas =
+ in(c_a, c_a);
  new kab;
  out(c_a, senc((i1,kab),kas));
  out(c_a, senc((i2,m),kab)).
@@ -21,8 +22,8 @@ let S kas ksb =
  then
    out(c_s, senc((i3,y),ksb)).
 
-let B ksb =
- in(c_b,x);
+let B ksb x =
+ in(c_b, c_b);
  let (x1,y) = sdec(x,ksb) in
  if x1 = i3
  then
@@ -35,10 +36,11 @@ let B ksb =
 let Inst m =
  new K_as;
  new K_sb;
- ((A m K_as) | (S K_as K_sb) | (B K_as)).
+ in(c,x);
+ ((A m K_as) | (S K_as K_sb) | (B K_as x)).
 
-let B_Spec m ksb =
- in(c_b,x);
+let B_Spec m ksb x =
+ in(c_b, c_b);
  let (x1,y) = sdec(x,ksb) in
  if x1 = i3
  then
@@ -53,7 +55,8 @@ let B_Spec m ksb =
 let Inst_Spec m =
  new K_as;
  new K_sb;
- ((A m K_as) | (S K_as K_sb) | (B_Spec m K_as)).
+ in(c,x);
+ ((A m K_as) | (S K_as K_sb) | (B_Spec m K_as x)).
 
 let Auth1 = 
 in(c,x);

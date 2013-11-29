@@ -38,24 +38,26 @@ let passport k_e k_m error_mac p =
     (if m_m = mac(m_e,k_m)
     then
       let (n_r,n_t_2,k_r) = sdec(m_e,k_e) in
-			
       if n_t_2 = n_t
-      then 
-	new k_t; 
-	let m = senc((n_t,n_r,k_t),k_e) in
-	out(p,(m,mac(m,k_m)))
+      then
+        new k_t;
+        let m = senc((n_t,n_r,k_t),k_e) in
+          out(p,(m,mac(m,k_m)))
       else out(p,Error_6300)
     else out(p,error_mac)).
 
 # Unlinkability
 
 let system1 error_mac =
-  (new k_e; new k_m; ((passport  k_e k_m error_mac p1) | (reader k_e k_m r1)))
+  new k_e; new k_m;
+  new k_e2; new k_m2;
+  (((passport  k_e k_m error_mac p1) | (reader k_e k_m r1))
   |
-  (new k_e; new k_m; ((passport  k_e k_m error_mac p1) | (reader k_e k_m r1))).
+  ((passport  k_e2 k_m2 error_mac p1) | (reader k_e2 k_m2 r1))).
 
 let system2 error_mac =
-  new k_e; new k_m; ((passport k_e k_m error_mac p1) | (reader k_e k_m r1) | (passport k_e k_m error_mac p1) | (reader k_e k_m r1)).
+  new k_e; new k_m;
+  ((passport k_e k_m error_mac p1) | (reader k_e k_m r1) | (passport k_e k_m error_mac p1) | (reader k_e k_m r1)).
 
 equivalence system1 Error_6300 and system2 Error_6300.
 
