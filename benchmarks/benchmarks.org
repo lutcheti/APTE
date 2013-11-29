@@ -38,25 +38,26 @@ one by version). We count the built-in measure of the time consumed.
 
 The column size contains the number of basic process / number
 of actions / max depth of the basic processes.
-We count the time consumed in seconds and the number of final tests (FT) corresponding
+We count the time consumed in seconds and the number of final
+tests (FT) (only when the quivalence is true) corresponding
 to the number of symbolic nodes that are explored.
 
-| Protocol               | Size   | Ref (s/FT)  | Comp (s/FT)   | Red(s/FT)    |
-|------------------------+--------+-------------+---------------+--------------|
-| Private Auth. 1 Sess.  | 2/9/5  | 0.164 / 790 | 0.012 / 60    | 0.0080 / 60  |
-| Private Auth. 2 Sess.  | 4/15/5 | 1078.00     | ?             | 0.060 / 393  |
-| Private Auth. 3 Sess.  | 6/21/5 | ?           | ?             | 5.04 / 14136 |
-| Basic Ac. Ctrl. 1 S./1 | 4/52/6 | 14.248      | ?             | ?            |
-| Basic Ac. Ctrl. 1 S./2 | 4/52/6 | > 1800      | ?             | ?            |
-| Wide Mouth Frog 1 S.   | 3/8/4  | 0.0760      | ?             | ?/?          |
-|------------------------+--------+-------------+---------------+--------------|
-| Simple 3 parallels     | 3/6/2  | 0.060       | 0.004 / 30    | 0.0040 / 24  |
-| Simple 5 parallels     | 5/10/2 | ?           | 0.124 / 650   | 0.024 / 160  |
-| Simple 7 parallels     | 7/14/2 | ?           | 8.512 / 27398 | 0.204 / 896  |
-| Simple 10 parallels    | 7/14/2 | ?           | 664 / 1972818 | 1.39 / 4608  |
-| Complex 4 parallels    | 4/10/4 | 94.18       | 0.55 / 130    | 0.136 / 66   |
-| Complex 7 parallels    | 7/16/4 | > 432000    | > 78876       | 363.08 / 898 |
-|------------------------+--------+-------------+---------------+--------------|
+| Protocol               | Size   | Ref (s/FT)  | Comp (s/FT)   | Red(s/FT)      |
+|------------------------+--------+-------------+---------------+----------------|
+| Private Auth. 1 Sess.  | 2/9/5  | 0.164 / 790 | 0.012 / 60    | 0.004 / 60     |
+| Private Auth. 2 Sess.  | 4/15/5 |             | 16.72 / 38721 | 11.856 / 29497 |
+| Private Auth. 3 Sess.  | 6/21/5 |             |               |                |
+| Basic Ac. Ctrl. 1 S./1 | 4/52/6 | 13.98       | 0.02          | 0.008          |
+| Basic Ac. Ctrl. 1 S./2 | 4/52/6 |             | 2.08          | 5.0960         |
+| Wide Mouth Frog 1 S.   | 3/8/4  |             |               |                |
+|------------------------+--------+-------------+---------------+----------------|
+| Simple 3 parallels     | 3/6/2  | 0.060       | 0.004 / 30    | 0.0040 / 24    |
+| Simple 5 parallels     | 5/10/2 |             | 0.124 / 650   | 0.024 / 160    |
+| Simple 7 parallels     | 7/14/2 |             | 8.512 / 27398 | 0.204 / 896    |
+| Simple 10 parallels    | 7/14/2 |             | 664 / 1972818 | 1.39 / 4608    |
+| Complex 4 parallels    | 4/10/4 | 94.18       | 0.55 / 130    | 0.136 / 66     |
+| Complex 7 parallels    | 7/16/4 | ? > 432000  | ? > 78876     | 363.08 / 898   |
+|------------------------+--------+-------------+---------------+----------------|
 
 
 About the names of procotols:
@@ -65,7 +66,7 @@ About the names of procotols:
   - Complex parallels: tests_h_* in Example/. Similar but here the test is much
     more complex;
   - We test two versions of the Basic Access Control Protocol (Bas. Ac. Ctrl.)
-    (and check the unlikability of the passeport.
+    (and check the unlikability of the passeport. The two equivalences are false.
 
 Notes: problem with Basic Acess Control (not simple?), problem with the version Comp
 (cherry-pick some commits from c+r, todo).
