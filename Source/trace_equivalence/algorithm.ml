@@ -369,6 +369,7 @@ let decide_trace_equivalence process1 process2 =
       Output;Input;
       Output;Input;
       Output;Input;Output ] nb_free_names [symb_proc1] [symb_proc2];
+    Printf.printf "Number of final tests: %d.\n" (!final_test_count);
     true
   with
     | Not_equivalent_left sym_proc ->
@@ -379,6 +380,3 @@ let decide_trace_equivalence process1 process2 =
         Printf.printf "Witness of non-equivalence on Process 2:\n%s"
           (Process.display_trace sym_proc);
         false
-  
-  
-  
