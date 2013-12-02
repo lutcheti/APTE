@@ -42,25 +42,25 @@ We count the time consumed in seconds and the number of final
 tests (FT) (only when the quivalence is true) corresponding
 to the number of symbolic nodes that are explored.
 
-| Protocol               | Size   | Ref (s/FT)  | Comp (s/FT)   | Red(s/FT)      |
-|------------------------+--------+-------------+---------------+----------------|
-| Private Auth. 1 Sess.  | 2/9/5  | 0.164 / 790 | 0.012 / 60    | 0.004 / 60     |
-| Private Auth. 2 Sess.  | 4/15/5 |             | 16.72 / 38721 | 11.856 / 29497 |
-| Private Auth. 3 Sess.  | 6/21/5 |             |               |                |
-| Basic Ac. Ctrl. 1 S./1 | 4/52/6 | 13.98       | 0.02          | 0.008          |
-| Basic Ac. Ctrl. 1 S./2 | 4/52/6 |             | 2.08          | 5.0960         |
-| Wide Mouth Frog 1 S.   | 3/8/4  |             |               |                |
-|------------------------+--------+-------------+---------------+----------------|
-| Simple 3 parallels     | 3/6/2  | 0.060       | 0.004 / 30    | 0.0040 / 24    |
-| Simple 5 parallels     | 5/10/2 |             | 0.124 / 650   | 0.024 / 160    |
-| Simple 7 parallels     | 7/14/2 |             | 8.512 / 27398 | 0.204 / 896    |
-| Simple 10 parallels    | 7/14/2 |             | 664 / 1972818 | 1.39 / 4608    |
-| Complex 4 parallels    | 4/10/4 | 94.18       | 0.55 / 130    | 0.136 / 66     |
-| Complex 7 parallels    | 7/16/4 | ? > 432000  | ? > 78876     | 363.08 / 898   |
-|------------------------+--------+-------------+---------------+----------------|
+| Protocol               | Size   | Ref (s/FT)         | Comp (s/FT)     | Red(s/FT)        |
+|------------------------+--------+--------------------+-----------------+------------------|
+| Private Auth. 1 Sess.  | 2/9/5  | 0.164 / 790        | 0.012 / 60      | 0.004 / 60       |
+| Private Auth. 2 Sess.  | 4/15/5 | (running) > 75h    | 16.72 / 38721   | 11.856 / 29497   |
+| Private Auth. 3 Sess.  | 6/21/5 | (running)          | (running) > 75h | 91266 / 40311052 |
+| Basic Ac. Ctrl. 1 S./1 | 4/52/6 | 13.98              | 0.02            | 0.008            |
+| Basic Ac. Ctrl. 1 S./2 | 4/52/6 | (running)          | 2.08            | 5.0960           |
+| Wide Mouth Frog 1 S.   | 3/8/4  | 0.28/1141          | Bug ??          | 0.004/15         |
+|------------------------+--------+--------------------+-----------------+------------------|
+| Simple 3 parallels     | 3/6/2  | 0.060              | 0.004 / 30      | 0.0040 / 24      |
+| Simple 5 parallels     | 5/10/2 | (running)          | 0.124 / 650     | 0.024 / 160      |
+| Simple 7 parallels     | 7/14/2 | (running)          | 8.512 / 27398   | 0.196 / 896      |
+| Simple 10 parallels    | 7/14/2 | ?                  | 664 / 1972818   | 1.05 / 4608      |
+| Complex 4 parallels    | 4/10/4 | 94.18              | 0.55 / 130      | 0.136 / 66       |
+| Complex 7 parallels    | 7/16/4 | (running) > 432000 | 198077 / 27400  | 363.08 / 898     |
+|------------------------+--------+--------------------+-----------------+------------------|
 
 
-About the names of procotols:
+About the names of protocols:
   - Simple parallels: Simple_bench_size in Example/. The protocol is made of
     similar basic processes of the form IN.[x=ok].OUT;
   - Complex parallels: tests_h_* in Example/. Similar but here the test is much
