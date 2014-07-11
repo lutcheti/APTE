@@ -933,7 +933,7 @@ let test_dependency_constraints symP =
        else begin
            (* BEGIN DEBUG *)
            if !Debug.red then
-             Printf.printf "A cst. does not satisfy the new criterion with NoUse because the list of axioms: %s is included in NoUse. See the frame: %s.\n"
+             Printf.printf "A cst. does not satisfy the new criterion with NoUse because the list of axioms: %s is included in NoUse. See the frame:\n %s.\n"
 			   (String.concat "; " (List.map Recipe.display_axiom  la))
 			   (Constraint.display_horizontally Constraint.Frame.display frame);
            (* END DEBUG *)
@@ -964,17 +964,21 @@ let test_dependency_constraints symP =
   let frame = Constraint_system.get_frame csys in
 
   (* BEGIN DEBUG *)
-  if !Debug.red then begin
-    let csts = (Constraint_system.get_dependency_constraints csys) in
-    if List.length csts <> 0 then begin
-      Printf.printf "We will check those dependency constraints: %s\n"
-        (Constraint_system.display_dependency_constraints csys);
-      Printf.printf "Do those constraints hold?: %B.\n" (scan_dep_csts frame csts);
-    end;
-  end;
-  (* END DEBUG *)
-
-  scan_dep_csts frame (Constraint_system.get_dependency_constraints csys)
+  if !Debug.red then
+    begin
+      let csts = (Constraint_system.get_dependency_constraints csys) in
+      if List.length csts <> 0 then
+	begin
+	  Printf.printf "We will check those dependency constraints: %s"
+			(Constraint_system.display_dependency_constraints csys);
+	  let result = scan_dep_csts frame csts in
+	  Printf.printf "Do those constraints hold?: %B.\n\n" result;
+	  result;
+	end else scan_dep_csts frame csts
+    end else
+    (* END DEBUG *)
+    
+    scan_dep_csts frame (Constraint_system.get_dependency_constraints csys)
 
 (* ********************************************************************** *)
 (*                 Build dependency constraints given a symbolic process  *)

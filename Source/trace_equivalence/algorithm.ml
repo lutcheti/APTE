@@ -220,6 +220,8 @@ let rec apply_strategy want_trace support left_symb_proc_l right_symb_proc_l =
   let size_before = List.length left_symb_proc_l_prop in
   (* Normally, dependency_constraints have already been simplified using recipe_eq
      (see Constraint_system.apply_recipe_subsitution)  *)
+  (* NOTE: normalement on a juste à filtrer d'un côté et enlever les process symboliques
+   correspondants également de l'autre côté mais pr le moment on est bête.*)
   let filter_proper_blocks symp_proc = Process.test_dependency_constraints symp_proc in
   let left_symb_proc_l_reduced = List.filter filter_proper_blocks left_symb_proc_l_prop
   and right_symb_proc_l_reduced = List.filter filter_proper_blocks right_symb_proc_l_prop in
