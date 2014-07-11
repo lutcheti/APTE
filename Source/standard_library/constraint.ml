@@ -888,9 +888,10 @@ end
 let is_subset_noUse la frame =
   let test_one ax1 elt =	(* outputs true only if elt is an axiom = ax1 *)
     let recipe = Frame.get_recipe elt in
-    try let ax2 = Recipe.axiom_of_recipe recipe in
-	Recipe.is_equal_axiom ax2 ax1
-    with Debug.Internal_error -> false in
+    if Recipe.is_axiom recipe then
+      let ax2 = Recipe.axiom_of_recipe recipe in
+      Recipe.is_equal_axiom ax2 ax1
+    else false in
   let rec aux_scan = function
     | [] -> true
     | ax :: la' ->
