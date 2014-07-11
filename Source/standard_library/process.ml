@@ -927,17 +927,30 @@ let test_dependency_constraints symP =
   let rec test_cst frame = function
     | (_, []) -> true
     | ([], _) -> false
+    | (_, la) as cst ->
+       if not (Constraint.is_subset_noUse la frame)  (* = la \notsusbseteq NoUse *)
+       then test_cst_aux frame cst
+       else begin
+           (* BEGIN DEBUG *)
+           if !Debug.red then
+             Printf.printf "A cst. does not satisfy the new criterion with NoUse because the list of axioms: %s is included in NoUse. See the frame: %s.\n"
+			   (String.concat "; " (List.map Recipe.display_axiom  la))
+			   (Constraint.display_horizontally Constraint.Frame.display frame);
+           (* END DEBUG *)
+           false;
+         end
+  and test_cst_aux frame = function
+    | (_, []) -> true
+    | ([], _) -> false
     | (r::lr , la) ->
-       not (Constraint.is_subset_noUse la frame)      (* = la \notsusbseteq NoUse *)
-       && 
        if Recipe.get_variables_of_recipe r != []
-      (* It is better to first check that r :: lr do not contain any
+       (* It is better to first check that r :: lr do not contain any
       non-ground recipes ? *)
-      then true                         (* cst is not ground *)
-      else (
-        if List.exists (fun ax -> Recipe.ax_occurs ax r) la
-        then true                     (* cst hold thanks to r *)
-        else test_cst frame (lr, la))
+       then true                         (* cst is not ground *)
+       else (
+         if List.exists (fun ax -> Recipe.ax_occurs ax r) la
+         then true                     (* cst hold thanks to r *)
+         else test_cst_aux frame (lr, la))
   in
   (* Scan the list of dep. csts*)
   let rec scan_dep_csts frame = function
