@@ -928,18 +928,20 @@ let test_dependency_constraints symP =
     | (_, []) -> true
     | ([], _) -> false
     | (_, la) as cst ->
-       if not (Constraint.is_subset_noUse la frame)  (* = la \notsusbseteq NoUse *)
-       then test_cst_aux frame cst
-       else begin
-           (* BEGIN DEBUG *)
-           if !Debug.red then
-             Printf.printf "A cst. does not satisfy the new criterion with NoUse because the list of axioms: %s is included in NoUse. See the frame:\n %s.\n"
-			   (String.concat "; " (List.map Recipe.display_axiom  la))
-			   (Constraint.display_horizontally Constraint.Frame.display frame);
-           (* END DEBUG *)
-           false;
-         end
-  and test_cst_aux frame = function
+       if test_cst_aux frame cst
+       then if Constraint.is_subset_noUse la frame;  (* = la \susbseteq NoUse *)
+	    then begin
+	   	(* BEGIN DEBUG *)
+		if !Debug.red then
+		  Printf.printf "A cst. does not satisfy the new criterion with NoUse because the list of axioms: %s is included in NoUse. See the frame:\n %s.\n"
+				(String.concat "; " (List.map Recipe.display_axiom  la))
+				(Constraint.display_horizontally Constraint.Frame.display frame);
+		(* END DEBUG *)
+		false;
+	      end
+	    else true
+       else true
+  and test_cst_aux frame = function (* checks a dependency constraint wrt. criterion (C) given a frame *)
     | (_, []) -> true
     | ([], _) -> false
     | (r::lr , la) ->
