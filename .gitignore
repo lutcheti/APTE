@@ -9,3 +9,4 @@ depend
 *.cmx
 *.cmxs
 *.cmxa
+benchmarks/log/Simple_*.log
