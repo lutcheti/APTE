@@ -44,26 +44,28 @@ let passport k_e k_m error_mac c =
 
 # Unlinkability
 
-let oneS ke km ke3 km3 error_mac cp cr =
+let oneS ke km ke2 km2 ke3 km3 error_mac cp cr =
 # Un passeport P(ke,km)
     (passport ke km error_mac cp
-# qui parle soit à "son" reader R(ke,km) soit à un reader qui le "jettera" R(ke2,km2)
-  | ((reader ke km cr) + (reader ke3 km3 cr))).
+# qui parle soit à "son" reader R(ke,km)
+# soit aux autres readers qui le "jetteront" R(ke2,km2) et R(ke2,km3)
+# ce qui correspond au scénario d'une lecture optique d'un autre/mauvais passeport
+  | ((reader ke km cr) + ((reader ke2 km2 cr) + (reader ke3 km3 cr)))).
 
 let system1 error_mac =
   new ke; new km;
   new ke2; new km2;
   new ke3; new km3;
-  (   (oneS ke km ke3 km3 error_mac cp1 cr1)
-    | (oneS ke km ke3 km3 error_mac cp2 cr2)
+  (   (oneS ke km ke2 km2 ke3 km3 error_mac cp1 cr1)
+    | (oneS ke km ke2 km2 ke3 km3 error_mac cp2 cr2)
   ).
 
 let system2 error_mac =
   new ke; new km;
   new ke2; new km2;
   new ke3; new km3;
-  (   (oneS ke km ke3 km3 error_mac cp1 cr1)
-    | (oneS ke2 km2 ke3 km3 error_mac cp2 cr2)
+  (   (oneS ke km ke2 km2 ke3 km3 error_mac cp1 cr1)
+    | (oneS ke2 km2 ke km ke3 km3 error_mac cp2 cr2)
   ).
 
 equivalence system1 Error_6300 and system2 Error_6300.
